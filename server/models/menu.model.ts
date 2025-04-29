@@ -27,8 +27,6 @@ interface IMenuItem extends Document {
     isAvailable: boolean;
   };
   customizations?: ICustomization[];
-  isActive: boolean;
-  version: number;
   imageUrl?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -100,16 +98,6 @@ const MenuItemSchema: Schema = new Schema(
         },
       ],
       default: [],
-    },
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
-    version: {
-      type: Number,
-      required: true,
-      default: 1,
-      min: [1, 'Version must be at least 1'],
     },
     imageUrl: {
       type: String,

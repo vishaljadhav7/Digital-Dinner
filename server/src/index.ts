@@ -1,6 +1,7 @@
 import { configDotenv } from "dotenv";
 import express, {Request, Response} from 'express';
 import {connectDatabases} from '../src/utils/connectDatabases';
+import { userRouter } from "./routes/user.route";
 
 configDotenv();
 
@@ -11,6 +12,7 @@ app.get("/", (req: Request , res: Response) => {
     res.status(200).send("healthy server"); 
 })
 
+app.use("/api/v1", userRouter);
 
 connectDatabases().then(() => {
     app.listen(PORT, () => {

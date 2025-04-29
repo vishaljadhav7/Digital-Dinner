@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 
-enum Category {
+export enum Category {
   Appetizer = 'Appetizer',
   MainCourse = 'Main Course',
   Dessert = 'Dessert',
@@ -15,7 +15,6 @@ interface ICustomization {
   maxQuantity: number; 
 }
 
-// Main MenuItem interface for type safety
 interface IMenuItem extends Document {
   name: string;
   price: number;
@@ -102,7 +101,7 @@ const MenuItemSchema: Schema = new Schema(
     imageUrl: {
       type: String,
       trim: true,
-      match: [/^https?:\/\/.*\.(?:png|jpg|jpeg|gif)$/, 'Invalid image URL'],
+      match: [/^https?:\/\/.*\.(?:png|jpg|jpeg|gif)(?:\?.*)?$/, 'Invalid image URL']
     },
   },
   { timestamps: true } // Adds createdAt, updatedAt

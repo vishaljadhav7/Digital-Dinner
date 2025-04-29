@@ -142,6 +142,7 @@ export const signInUserService = async (data: SignInBody) => {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       throw new InternalServerError('Failed to authenticate user');
     }
+    
 
     // Handle unexpected errors
     throw new InternalServerError('Internal server error');

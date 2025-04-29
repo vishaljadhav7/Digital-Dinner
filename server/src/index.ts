@@ -2,6 +2,7 @@ import { configDotenv } from "dotenv";
 import express, {Request, Response} from 'express';
 import {connectDatabases} from '../src/utils/connectDatabases';
 import { userRouter } from "./routes/user.route";
+import { menuRouter } from "./routes/menu.route";
 import cookieParser from 'cookie-parser';
 
 configDotenv();
@@ -20,6 +21,8 @@ app.get("/", (req: Request , res: Response) => {
 })
 
 app.use("/api/v1", userRouter);
+
+app.use("/api/v1", menuRouter)
 
 connectDatabases().then(() => {
     app.listen(PORT, () => {

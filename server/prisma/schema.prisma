@@ -19,6 +19,8 @@ name String
 
 email String @unique
 
+password String
+
 phoneNum String @unique
 
 orders Order[] @relation("UserOrders") 

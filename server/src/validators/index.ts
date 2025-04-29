@@ -9,7 +9,7 @@ export const validateRequestBody = (schema: AnyZodObject): RequestHandler => {
       next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        console.log('Zod validation errors:', error.errors);
+        // console.log('Zod validation errors:', error.errors);
         res.status(400).json({
           success: false,
           errors: error.errors.map((err) => ({

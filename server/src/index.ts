@@ -1,6 +1,6 @@
 import { configDotenv } from "dotenv";
 import express, {Request, Response} from 'express';
-
+import {connectDatabases} from '../src/utils/connectDatabases';
 
 configDotenv();
 
@@ -12,6 +12,10 @@ app.get("/", (req: Request , res: Response) => {
 })
 
 
-app.listen(PORT, () => {
-    console.log(`server listening on port ${PORT}`);
+connectDatabases().then(() => {
+    app.listen(PORT, () => {
+        console.log(`server listening on port ${PORT}`);
+    })
+}).catch((err) => {
+    console.log("DB connection failed : ", err.message)
 })

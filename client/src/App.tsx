@@ -6,6 +6,12 @@ import MenuPage from './pages/MenuPage'
 import { Provider } from 'react-redux'
 import {store} from './redux/appStore'
 import Cart from './pages/Cart'
+import { Toaster } from 'sonner'
+import SignUp from './pages/SignUp'
+import SignIn from './pages/SignIn'
+import Profile from './pages/Profile'
+import ProtectedRoute from './components/ProtectedRoute';
+import ValidateRoute from './components/ValidateRoute';
 
 function App() {
 
@@ -16,7 +22,7 @@ function App() {
       children : [
         {
           path : "/",
-          element : <HeroSection/>
+          element : <ValidateRoute><HeroSection/></ValidateRoute> 
         },
         {
           path : "/menu",
@@ -29,9 +35,22 @@ function App() {
         {
           path : "/cart",
           element : <Cart/>
+        },
+        {
+          path : "/profile",
+          element :  <ProtectedRoute><Profile/></ProtectedRoute>
+        },
+        {
+          path : "/signup",
+          element : <ValidateRoute><SignUp/></ValidateRoute>
+        },
+        {
+          path : "/signin",
+          element :  <ValidateRoute> <SignIn/> </ValidateRoute>
         }
-      ]
-    }
+      ],
+    },
+
   ])
 
   return (
@@ -40,6 +59,7 @@ function App() {
 
       <Provider store={store}>   
        <RouterProvider router={appRouter}/>
+       <Toaster/>
       </Provider>  
       </div>
     </>

@@ -18,9 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 
 app.use(cors({
-    origin : "*",
-    methods : ["POST", "GET"]
-}))
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"], 
+    credentials: true 
+  }));
 
 app.get("/", (req: Request , res: Response) => {
     res.status(200).send("healthy server"); 

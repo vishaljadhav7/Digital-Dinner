@@ -5,6 +5,7 @@ import { addItems, decrementItem } from '../features/cart';
 import { useAppDispatch } from '../redux/hooks';
 import { IMenuItem } from '../features/types';
 
+
 const MenuPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { itemId } = useParams<{ itemId: string }>();

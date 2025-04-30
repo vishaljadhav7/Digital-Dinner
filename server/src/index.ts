@@ -3,6 +3,7 @@ import express, {Request, Response} from 'express';
 import {connectDatabases} from '../src/utils/connectDatabases';
 import { userRouter } from "./routes/user.route";
 import { menuRouter } from "./routes/menu.route";
+import { orderRouter } from "./routes/order.route";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
@@ -29,7 +30,10 @@ app.get("/", (req: Request , res: Response) => {
 
 app.use("/api/v1", userRouter);
 
-app.use("/api/v1", menuRouter)
+app.use("/api/v1", menuRouter);
+
+app.use("/api/v1", orderRouter);
+
 
 connectDatabases().then(() => {
     app.listen(PORT, () => {

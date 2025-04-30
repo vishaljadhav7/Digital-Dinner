@@ -114,9 +114,11 @@ const Menu: React.FC = () => {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {items.map((item: MenuItem, itemIndex : number) => (
-                      <Link to={`/menu/${item._id}`}>                      
+                      <Link 
+                      key={item._id.$oid}
+                      to={`/menu/${item._id}`}>                      
                       <div
-                        key={item._id.$oid}
+                      
                         className="relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-beige-200 transform hover:-translate-y-1 transition-all duration-300 animate-fade-in"
                         style={{ animationDelay: `${(sectionIndex * 100) + (itemIndex * 50)}ms` }}
                       >

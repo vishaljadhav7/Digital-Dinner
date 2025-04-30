@@ -19,7 +19,7 @@ const MenuPage: React.FC = () => {
         const response = await axios.get(`http://localhost:4000/api/v1/menu/item`, {
             params: { itemId },
           });
-          console.log(response)
+         
       setItem(response.data.data);
       setLoading(false);
     } catch (err: any) {

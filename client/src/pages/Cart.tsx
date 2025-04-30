@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { Trash2 } from 'lucide-react';
 import { IMenuItem } from '../features/types';
@@ -12,6 +12,7 @@ const Cart: React.FC = () => {
   const items = useAppSelector((store) => store.cart.items) as IMenuItem[];
   const user = useAppSelector((store) => store.user)
   const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading]  = useState<boolean>(false)
   
   const increment = (item: IMenuItem) => {
     dispatch(addItems(item))
@@ -30,7 +31,8 @@ const Cart: React.FC = () => {
   };
 
   const handleOrder = async () => {
-    if(!user.isAuthenticated){
+    setIsLoading(true)
+    if(!user.isAuthenticated ){
       toast.error("please sign in to make an order!", {
         style: {
           background: 'red',
@@ -38,23 +40,39 @@ const Cart: React.FC = () => {
         },
       });
       return;
-    }
+    } 
+    
+    if( items.length <= 0){
+      toast.error("No items in cart!", {
+        style: {
+          background: 'red',
+          color: 'white',
+        },
+      });
+      return;
+    } 
      
      try {
-      const res = await axios.post("http://localhost:4000/api/v1/order", {
-        userId : user.userInfo?.id,
-        items : JSON.stringify(items) 
+       await axios.post("http://localhost:4000/api/v1/order", {
+        userId: user.userInfo?.id,
+        items: JSON.stringify(items)
       }, {
-        withCredentials : true
-      })
-       console.log("res.data.data ", res.data.data)
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+
+        }
+      });
      } catch (error) {
+      console.error(error)
       toast.error("could not create the order server error!", {
         style: {
           background: 'red',
           color: 'white',
         },
       });
+     } finally {
+      setIsLoading(false)
      }
   }
 
@@ -157,9 +175,10 @@ const Cart: React.FC = () => {
               <div className="mt-8 flex gap-3 justify-end">
                 <button
                 onClick={handleOrder}
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-bg-green-700 transition-colors font-semibold"
+                disabled={isLoading}
+                className={`px-6 py-3 ${isLoading ? "bg-slate-400 text-white" : "bg-green-600 text-white"} rounded-lg hover:bg-bg-green-700 transition-colors font-semibold`}
                 >
-                 Order 
+                 { isLoading ?  "Loading..." : "Order" }
                 </button>
                 <button
                   onClick={clearCart}

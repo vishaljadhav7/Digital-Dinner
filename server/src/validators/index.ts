@@ -9,7 +9,7 @@ export const validateRequestBody = (schema: AnyZodObject): RequestHandler => {
       next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        // console.log('Zod validation errors:', error.errors);
+
         res.status(400).json({
           success: false,
           errors: error.errors.map((err) => ({
@@ -32,9 +32,7 @@ export const validateRequestBody = (schema: AnyZodObject): RequestHandler => {
 export const validateQueryParams = (schema: AnyZodObject) : RequestHandler => {
   return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       try {
-
           await schema.parseAsync(req.query);
-       
           next();
 
       } catch (error) {

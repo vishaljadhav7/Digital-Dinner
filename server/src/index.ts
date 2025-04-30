@@ -4,6 +4,7 @@ import {connectDatabases} from '../src/utils/connectDatabases';
 import { userRouter } from "./routes/user.route";
 import { menuRouter } from "./routes/menu.route";
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 configDotenv();
 
@@ -15,6 +16,11 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(express.urlencoded({extended : false}));
+
+app.use(cors({
+    origin : "*",
+    methods : ["POST", "GET"]
+}))
 
 app.get("/", (req: Request , res: Response) => {
     res.status(200).send("healthy server"); 

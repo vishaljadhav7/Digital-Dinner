@@ -9,8 +9,8 @@ const menuRouter = express.Router();
 
 menuRouter.get("/menu",  getMenuItems);
 
+menuRouter.get("/menu/item",  validateQueryParams(getItemSchema) ,getMenuItem);
 
-menuRouter.get("/menu/:itemId",  validateQueryParams(getItemSchema) ,getMenuItem);
 
 
 export {menuRouter};

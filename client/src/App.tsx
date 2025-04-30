@@ -3,6 +3,9 @@ import { createBrowserRouter , RouterProvider} from 'react-router-dom'
 import HeroSection from './components/HeroSection'
 import Menu from './pages/Menu'
 import MenuPage from './pages/MenuPage'
+import { Provider } from 'react-redux'
+import {store} from './redux/appStore'
+import Cart from './pages/Cart'
 
 function App() {
 
@@ -25,7 +28,7 @@ function App() {
         },
         {
           path : "/cart",
-          element : <></>
+          element : <Cart/>
         }
       ]
     }
@@ -34,8 +37,10 @@ function App() {
   return (
     <>
       <div className=''>
-      <RouterProvider router={appRouter}/>
 
+      <Provider store={store}>   
+       <RouterProvider router={appRouter}/>
+      </Provider>  
       </div>
     </>
   )

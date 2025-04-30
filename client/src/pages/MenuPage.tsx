@@ -1,30 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
-
-interface Customization {
-  name: string;
-  price: number;
-  maxQuantity: number;
-}
-
-interface MenuItem {
-  _id: string;
-  name: string;
-  price: number;
-  category: string;
-  description: string;
-  ingredients: string[];
-  tags: string[];
-  availability: { isAvailable: boolean };
-  customizations: Customization[];
-  imageUrl: string;
-}
+import { addItems, decrementItem } from '../features/cart';
+import { useAppDispatch } from '../redux/hooks';
+import { IMenuItem } from '../features/types';
 
 const MenuPage: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { itemId } = useParams<{ itemId: string }>();
-  const [item, setItem] = useState<MenuItem | null>(null);
+  const [item, setItem] = useState<IMenuItem | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [cartCount, setCartCount] = useState<number>(0);
@@ -42,20 +26,29 @@ const MenuPage: React.FC = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
 
     fetchMenuItem();
   }, [itemId]);
 
   const handleAddToCart = () => {
+    if(!item)return;
+
+    dispatch(addItems(item ))
     setCartCount(1);
+
   };
 
   const handleIncrement = () => {
+    if(!item)return;
+    dispatch(addItems(item ))
     setCartCount((prev) => prev + 1);
   };
 
   const handleDecrement = () => {
+    if(!item)return;
+    dispatch(decrementItem(item))
     setCartCount((prev) => (prev > 0 ? prev - 1 : 0));
   };
 
@@ -105,6 +98,7 @@ const MenuPage: React.FC = () => {
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-beige-50 font-inter flex items-center justify-center py-12">

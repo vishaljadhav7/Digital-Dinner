@@ -40,8 +40,6 @@ export const getMenuItems = async (req: Request, res: Response): Promise<void> =
 
   export const getMenuItem = async (req: Request<{}, {}, {}, {itemId : string}>, res: Response): Promise<void> => {
     try {
-
-      console.log("params =>>>>> ", req.query)
       const itemId = req.query.itemId; 
       const item = await getMenuItemService({ itemId });
   

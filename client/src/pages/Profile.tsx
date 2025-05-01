@@ -1,10 +1,17 @@
 import { useAppSelector } from "../redux/hooks";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { IMenuItem } from "../features/types";
+
+interface IOrder {
+  id : string;
+  userId : string;
+  items : IMenuItem[]
+}
 
 const Profile = () => {
   const user = useAppSelector((store) => store.user.userInfo);
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<IOrder[]>([]);
 
   const fetchOrders = async () => {
     try {
@@ -43,6 +50,7 @@ const Profile = () => {
             <span className="text-gray-500 text-sm font-medium">Email:</span>
             <p className="text-gray-900">{user?.email}</p>
           </div>
+          
           <div className="flex items-center space-x-2">
             <span className="text-gray-500 text-sm font-medium">Phone:</span>
             <p className="text-gray-900">{user?.phoneNum}</p>
@@ -81,6 +89,7 @@ const Profile = () => {
                           className="flex items-center space-x-3 cursor-pointer"
                          
                         >
+                          
                           <img
                             src={item.imageUrl}
                             alt={item.name}

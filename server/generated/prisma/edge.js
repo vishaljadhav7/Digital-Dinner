@@ -143,7 +143,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\sonof\\Desktop\\projects\\Digital Dining\\server\\src\\generated\\prisma",
+      "value": "C:\\Users\\sonof\\Desktop\\projects\\Digital Dining\\server\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -161,10 +161,10 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": "../../.env",
+    "schemaEnvPath": "../../.env"
   },
-  "relativePath": "../../../prisma",
+  "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
   "engineVersion": "f676762280b54cd07c770017ed3711ddde35f37a",
   "datasourceNames": [
@@ -180,8 +180,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id String @id @default(uuid())\n\n  name String\n\n  email String @unique\n\n  password String\n\n  phoneNum String @unique\n\n  orders Order[] @relation(\"UserOrders\")\n\n  createdAt DateTime @default(now())\n\n  updatedAt DateTime @updatedAt\n}\n\nmodel Order {\n  id String @id @default(uuid())\n\n  userId String\n\n  items Json\n\n  user User @relation(\"UserOrders\", fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n\n  updatedAt DateTime @updatedAt\n}\n",
-  "inlineSchemaHash": "15619231ada783aac04eb3ed31cc584e67632c8cf43775d2afea232dc74d53a3",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  name      String\n  email     String   @unique\n  password  String\n  phoneNum  String   @unique\n  orders    Order[]  @relation(\"UserOrders\")\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Order {\n  id        String   @id @default(uuid())\n  userId    String\n  items     Json\n  user      User     @relation(\"UserOrders\", fields: [userId], references: [id], onDelete: Cascade)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "9e440ed748b8927a9f19dcc5e2f49e0323ab34f99f622684ff3697e1d54aad8c",
   "copyEngine": true
 }
 config.dirname = '/'

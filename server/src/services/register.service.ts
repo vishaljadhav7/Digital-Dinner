@@ -1,5 +1,5 @@
 import {prisma} from '../utils/client';
-import { Prisma } from '../generated/prisma';
+import { Prisma } from '../../generated/prisma';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { SignUpBody, SignInBody } from '../types';

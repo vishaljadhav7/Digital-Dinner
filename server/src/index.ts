@@ -1,6 +1,7 @@
 import { configDotenv } from "dotenv";
 import express, {Request, Response} from 'express';
-import {connectDatabases} from '../src/utils/connectDatabases';
+// import {connectDatabases} from '../src/utils/connectDatabases';
+import { connectDatabases } from "./utils/connectDatabases";
 import { userRouter } from "./routes/user.route";
 import { menuRouter } from "./routes/menu.route";
 import { orderRouter } from "./routes/order.route";

@@ -1,4 +1,4 @@
-[
+export const mockData = [ 
   {
     "name": "Bruschetta",
     "price": 746.67,

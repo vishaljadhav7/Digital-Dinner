@@ -101,10 +101,10 @@ const MenuItemSchema: Schema = new Schema(
     imageUrl: {
       type: String,
       trim: true,
-      match: [/^https?:\/\/.*\.(?:png|jpg|jpeg|gif)(?:\?.*)?$/, 'Invalid image URL']
+      match: [/^https?:\/\/.*?(?:\.(?:png|jpg|jpeg|gif))?(?:\?.*)?$/, 'Invalid image URL']
     },
   },
-  { timestamps: true } // Adds createdAt, updatedAt
+  { timestamps: true } 
 );
 
 

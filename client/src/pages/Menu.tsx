@@ -30,7 +30,7 @@ const Menu: React.FC = () => {
   const fetchMenuItems = async () => {
     try {
  
-      const response = await axios.get(`${import.meta.env.VITE_PUBLIC_API}/menu`);
+      const response = await axios.get(`${import.meta.env.VITE_PUBLIC_API}/api/v1/menu`);
       const items: MenuItem[] = response.data.data;
       
 

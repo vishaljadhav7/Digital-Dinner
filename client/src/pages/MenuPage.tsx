@@ -16,7 +16,7 @@ const MenuPage: React.FC = () => {
 
   const fetchMenuItem = async () => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_PUBLIC_API}/menu/item`, {
+        const response = await axios.get(`${import.meta.env.VITE_PUBLIC_API}/api/v1/menu/item`, {
             params: { itemId },
           });
          

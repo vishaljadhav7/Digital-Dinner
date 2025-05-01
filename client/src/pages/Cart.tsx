@@ -43,7 +43,7 @@ const Cart: React.FC = () => {
     } 
      
      try {
-       await axios.post(`${import.meta.env.VITE_PUBLIC_API}/order`, {
+       await axios.post(`${import.meta.env.VITE_PUBLIC_API}/api/v1/order`, {
         userId: user.userInfo?.id,
         items: JSON.stringify(items)
       }, {

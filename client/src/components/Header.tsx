@@ -16,7 +16,7 @@ const Header = () => {
 
    const handleSignOut =  async () => {
      try {
-       await axios.post(`${import.meta.env.VITE_PUBLIC_API}/sign-out`, {}, {
+       await axios.post(`${import.meta.env.VITE_PUBLIC_API}/api/v1/sign-out`, {}, {
         withCredentials : true
        });
        dispatch(removeUser());

@@ -25,7 +25,7 @@ const SignIn =  () => {
 
   const onSubmit: SubmitHandler<FormField> = async (data) => {
     try {
-      const res = await axios.post(`${import.meta.env.VITE_PUBLIC_API}/sign-in`, data , {
+      const res = await axios.post(`${import.meta.env.VITE_PUBLIC_API}/api/v1/sign-in`, data , {
         withCredentials : true
       });
       dispactch(addUser(res.data.data));

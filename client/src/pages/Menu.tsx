@@ -29,20 +29,23 @@ const Menu: React.FC = () => {
 
   const fetchMenuItems = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/menu');
+ 
+      const response = await axios.get(`${import.meta.env.VITE_PUBLIC_API}/menu`);
       const items: MenuItem[] = response.data.data;
+      
 
       // Group items by category
       const groupedItems: CategorizedItems = {
-        Appetizer: items.filter((item) => item.category === 'Appetizer'),
-        'Main Course': items.filter((item) => item.category === 'Main Course'),
-        Dessert: items.filter((item) => item.category === 'Dessert'),
-        Drink: items.filter((item) => item.category === 'Drink'),
+        Appetizer: items?.filter((item) => item?.category === 'Appetizer'),
+        'Main Course': items?.filter((item) => item?.category === 'Main Course'),
+        Dessert: items?.filter((item) => item?.category === 'Dessert'),
+        Drink: items?.filter((item) => item?.category === 'Drink'),
       };
 
       setCategorizedItems(groupedItems);
       setLoading(false);
-    } catch (err: any) {
+    } catch (err) {
+      console.error(err);
       setError('Failed to load menu items. Please try again later.');
       setLoading(false);
     }
@@ -104,7 +107,7 @@ const Menu: React.FC = () => {
         ) : (
           <>
             {Object.entries(categorizedItems).map(([category, items], sectionIndex) => (
-              items.length > 0 && (
+              items?.length > 0 && (
                 <section key={category} className="mb-20">
                   <div className="text-center mb-8 animate-fade-in" style={{ animationDelay: `${sectionIndex * 100}ms` }}>
                     <h2 className="text-3xl font-playfair font-semibold text-olive-800">
@@ -115,7 +118,7 @@ const Menu: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {items.map((item: MenuItem, itemIndex : number) => (
                       <Link 
-                      key={item._id.$oid}
+                      key={itemIndex}
                       to={`/menu/${item._id}`}>                      
                       <div
                       

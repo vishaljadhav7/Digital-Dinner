@@ -84,3 +84,20 @@ export const signInUser = async (
     }
   }
 }
+
+
+
+export const signOut = async (req : Request, res : Response) => {
+  try {
+    
+     res
+     .status(200)
+     .clearCookie("token")
+     .json(new ApiResponse(200, {}, "User has logged Out"))
+     return
+     
+  } catch (error : any) {
+     res.status(400).json(new BadRequestError(error.message));
+     return
+  }
+}

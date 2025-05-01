@@ -86,7 +86,7 @@ const cartSlice = createSlice({
       }
     },
 
-    clearCart: (state) => {
+    emptyCart: (state) => {
       state.items = [];
       toast.error('Cart cleared', {
         style: {
@@ -99,6 +99,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItems, removeItems, decrementItem, clearCart } = cartSlice.actions;
+export const { addItems, removeItems, decrementItem, emptyCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

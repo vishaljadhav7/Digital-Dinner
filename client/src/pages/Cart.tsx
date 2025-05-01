@@ -4,7 +4,7 @@ import { Trash2 } from 'lucide-react';
 import { IMenuItem } from '../features/types';
 import { Link } from 'react-router-dom';
 import { Plus, Minus } from 'lucide-react';
-import { addItems, removeItems, decrementItem } from '../features/cart';
+import { addItems, removeItems, decrementItem, emptyCart } from '../features/cart';
 import { toast } from 'sonner';
 import axios from 'axios';
 
@@ -27,7 +27,7 @@ const Cart: React.FC = () => {
   };
 
   const clearCart = () => { 
-    console.log('Clear Cart');
+    dispatch(emptyCart())
   };
 
   const handleOrder = async () => {
@@ -41,19 +41,9 @@ const Cart: React.FC = () => {
       });
       return;
     } 
-    
-    if( items.length <= 0){
-      toast.error("No items in cart!", {
-        style: {
-          background: 'red',
-          color: 'white',
-        },
-      });
-      return;
-    } 
      
      try {
-       await axios.post("http://localhost:4000/api/v1/order", {
+       await axios.post(`${import.meta.env.VITE_PUBLIC_API}/order`, {
         userId: user.userInfo?.id,
         items: JSON.stringify(items)
       }, {
@@ -63,6 +53,16 @@ const Cart: React.FC = () => {
 
         }
       });
+
+      toast.success("Order created!", {
+        style: {
+          background: 'green',
+          color: 'white',
+        },
+      });
+
+     dispatch(emptyCart());
+
      } catch (error) {
       console.error(error)
       toast.error("could not create the order server error!", {

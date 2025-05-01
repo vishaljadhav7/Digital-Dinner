@@ -16,13 +16,14 @@ const MenuPage: React.FC = () => {
 
   const fetchMenuItem = async () => {
     try {
-        const response = await axios.get(`http://localhost:4000/api/v1/menu/item`, {
+        const response = await axios.get(`${import.meta.env.VITE_PUBLIC_API}/menu/item`, {
             params: { itemId },
           });
          
       setItem(response.data.data);
       setLoading(false);
-    } catch (err: any) {
+    } catch (err) {
+      console.error(err)
       setError('Failed to load menu item. Please try again later.');
       setLoading(false);
     }
@@ -83,7 +84,7 @@ const MenuPage: React.FC = () => {
           <p className="text-red-500 text-lg font-semibold font-inter">{error}</p>
           <button
             onClick={() => { setLoading(true); setError(null); fetchMenuItem(); }}
-            className="mt-4 px-6 py-2 bg-olive-700 text-white rounded-lg hover:bg-olive-800 transition-colors font-inter"
+            className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-olive-800 transition-colors font-inter"
           >
             Retry
           </button>
@@ -105,7 +106,7 @@ const MenuPage: React.FC = () => {
     <div className="min-h-screen bg-beige-50 font-inter flex items-center justify-center py-12">
       <div className="max-w-3xl w-full mx-auto px-6 sm:px-8 lg:px-12 animate-fade-in">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          {/* Image */}
+     
           <div className="relative w-full h-80">
             <img
               src={item?.imageUrl}
@@ -119,7 +120,7 @@ const MenuPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Content */}
+          
           <div className="p-8 space-y-6">
             {/* Name and Price */}
             <div className="text-center">

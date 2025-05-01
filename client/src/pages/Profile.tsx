@@ -8,7 +8,7 @@ const Profile = () => {
 
   const fetchOrders = async () => {
     try {
-      const allOrders = await axios.get("http://localhost:4000/api/v1/order", {
+      const allOrders = await axios.get(`${import.meta.env.VITE_PUBLIC_API}/order`, {
         withCredentials: true,
       });
       setOrders(allOrders.data.data);

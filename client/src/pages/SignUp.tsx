@@ -25,7 +25,7 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<FormField> = async (data) => {
     try {
-      const res = await axios.post(`http://localhost:4000/api/v1/sign-up` , data, {
+      const res = await axios.post(`${import.meta.env.VITE_PUBLIC_API}/sign-up` , data, {
         withCredentials : true
       });
 

@@ -4,7 +4,7 @@ import { mockData } from "./menuItems";
 
 const connectDB = async () => {
     try {
-      await mongoose.connect('mongodb+srv://vishalj7661:ZaEHSBSErkPR7l5I@cluster1.m3gkm.mongodb.net/digitalDinner');
+    await mongoose.connect(process.env.MONGODB_URI!);
       console.log('MongoDB connected successfully');
     } catch (error) {
       console.error('MongoDB connection error:', error);
